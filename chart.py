@@ -1,74 +1,52 @@
-import pandas as pd
-import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
 
-# Set Seaborn style and context for a professional look
-sns.set_theme(style="whitegrid", palette="pastel")
-sns.set_context("notebook", font_scale=1.2)
+# Set professional styling for the plot
+sns.set_style("whitegrid")
+sns.set_context("talk")
 
-# --- Data Generation ---
-# Create synthetic data for customer acquisition cost and lifetime value
-np.random.seed(42)  # for reproducibility
-num_campaigns = 50
-
-# Generate acquisition costs
-acquisition_cost = np.random.uniform(5, 50, num_campaigns)
-
-# Generate lifetime values
-# Lifetime value is generally higher for campaigns with lower acquisition costs, but with noise
-lifetime_value = 150 - 2 * acquisition_cost + np.random.normal(0, 20, num_campaigns)
-
-# Ensure lifetime values are positive
-lifetime_value = np.maximum(5, lifetime_value)
-
-# Create a DataFrame
+# Generate realistic synthetic data
+np.random.seed(42)
+num_customers = 200
+cac = np.random.uniform(5, 50, num_customers)
+clv = 2 * cac + np.random.normal(0, 15, num_customers)
+clv[clv < 0] = np.random.uniform(5, 20, np.sum(clv < 0))
+campaigns = np.random.choice(['Campaign A', 'Campaign B', 'Campaign C'], num_customers)
 data = pd.DataFrame({
-    'Customer Acquisition Cost': acquisition_cost,
-    'Customer Lifetime Value': lifetime_value
+    'customer_acquisition_cost': cac,
+    'customer_lifetime_value': clv,
+    'marketing_campaign': campaigns
 })
 
-# --- Visualization ---
-# Create a figure with a specific size for the desired output dimensions
+# Create the scatter plot
 plt.figure(figsize=(8, 8))
-
-# Create the scatterplot
-ax = sns.scatterplot(
+scatter_plot = sns.scatterplot(
     data=data,
-    x='Customer Acquisition Cost',
-    y='Customer Lifetime Value',
-    s=150,  # Size of the markers
-    edgecolor='w',
-    linewidth=1.5,
+    x='customer_acquisition_cost',
+    y='customer_lifetime_value',
+    hue='marketing_campaign',
+    palette='viridis',
+    s=100,
+    edgecolor='black',
     alpha=0.8
 )
 
-# Add a title and labels
-plt.title(
-    'Customer Acquisition Cost vs. Lifetime Value',
-    fontsize=16,
-    fontweight='bold',
-    pad=20
-)
-plt.xlabel('Customer Acquisition Cost ($)', fontsize=12)
-plt.ylabel('Customer Lifetime Value ($)', fontsize=12)
+# Add titles and labels for professional appearance
+plt.title("Customer Lifetime Value vs. Acquisition Cost", fontsize=20, fontweight='bold', pad=20)
+plt.xlabel("Customer Acquisition Cost ($)", fontsize=14)
+plt.ylabel("Customer Lifetime Value ($)", fontsize=14)
+plt.legend(title='Marketing Campaign')
 
-# Add a line showing a hypothetical break-even point or trend line
-# This adds a critical business insight
-x_vals = np.array(ax.get_xlim())
-y_vals = x_vals
-plt.plot(x_vals, y_vals, color='red', linestyle='--', linewidth=2, label='Break-Even Point (LTV = CAC)')
-plt.legend()
+# Add a reference line for visual insight
+x_values = np.linspace(5, 50, 100)
+plt.plot(x_values, 2 * x_values, 'r--', label='CLV = 2 x CAC')
+plt.legend(title='Marketing Campaign', loc='upper left')
 
-# Add a subtle grid for better readability
-ax.grid(True, linestyle='--', alpha=0.6)
-
-# Improve layout
+# Adjust layout to prevent clipping
 plt.tight_layout()
 
-# --- Export the chart ---
-# Save the figure as a PNG with 512x512 pixel dimensions
-# The `dpi=64` and `figsize=(8, 8)` combination achieves the target size (8 * 64 = 512)
+# Save the chart as a PNG with 512x512 pixel dimensions
+# Remove bbox_inches='tight' to prevent resizing
 plt.savefig('chart.png', dpi=64)
-
-print("Chart successfully created and saved as chart.png")
