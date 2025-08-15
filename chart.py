@@ -44,9 +44,9 @@ x_values = np.linspace(5, 50, 100)
 plt.plot(x_values, 2 * x_values, 'r--', label='CLV = 2 x CAC')
 plt.legend(title='Marketing Campaign', loc='upper left')
 
-# Adjust layout to prevent clipping
+# Adjust layout to prevent clipping without affecting the image size
 plt.tight_layout()
 
-# Save the chart as a PNG with 512x512 pixel dimensions
-# Remove bbox_inches='tight' to prevent resizing
+# Save the chart as a PNG with the correct pixel dimensions
+# The `bbox_inches='tight'` parameter has been removed to ensure the output is exactly 512x512 pixels.
 plt.savefig('chart.png', dpi=64)
