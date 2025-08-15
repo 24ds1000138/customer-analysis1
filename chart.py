@@ -23,7 +23,7 @@ df = pd.DataFrame({
 sns.set_style("whitegrid")
 sns.set_context("talk")  # Presentation-ready font sizes
 
-plt.figure(figsize=(8, 8))  # 8 inches * 64 dpi = 512 pixels
+plt.figure(figsize=(8, 8))  # 8 inches × 64 dpi = 512 px
 
 # Scatterplot with professional styling
 sns.scatterplot(
@@ -44,9 +44,8 @@ plt.title("Customer Lifetime Value vs. Acquisition Cost", fontsize=18, fontweigh
 plt.xlabel("Customer Acquisition Cost (USD)", fontsize=14)
 plt.ylabel("Customer Lifetime Value (USD)", fontsize=14)
 
-# Tight layout for better spacing
 plt.tight_layout()
 
 # Save chart exactly 512x512 pixels
-plt.savefig("chart.png", dpi=64, bbox_inches='tight')
+plt.savefig("chart.png", dpi=64)
 plt.close()
