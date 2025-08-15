@@ -2,39 +2,18 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
-import numpy as np
 
-# Fixed random seed for reproducibility
-np.random.seed(0)
-
-# Generate deterministic synthetic data
-cac = np.linspace(100, 300, 100)  # evenly spaced CAC values
-clv = cac * 4 + 500  # fixed linear relationship
-
+# Example dataset
 df = pd.DataFrame({
-    "Customer Acquisition Cost (USD)": cac,
-    "Customer Lifetime Value (USD)": clv
+    "x": [1, 2, 3, 4, 5, 6],
+    "y": [2, 4, 1, 8, 7, 3]
 })
 
-# Seaborn styling
-sns.set_style("whitegrid")
-sns.set_context("talk")
+# Create seaborn scatterplot
+sns.scatterplot(x="x", y="y", data=df)
 
-# Create figure exactly 512x512 pixels
-plt.figure(figsize=(8, 8))
+# Ensure exact 512x512 pixels at 100 DPI
+plt.gcf().set_size_inches(512/100, 512/100)
 
-# Simple scatterplot
-sns.scatterplot(
-    data=df,
-    x="Customer Acquisition Cost (USD)",
-    y="Customer Lifetime Value (USD)"
-)
-
-# Labels and title
-plt.title("Customer Lifetime Value vs. Acquisition Cost")
-plt.xlabel("Customer Acquisition Cost (USD)")
-plt.ylabel("Customer Lifetime Value (USD)")
-
-# Save exactly 512x512 pixels
-plt.savefig("chart.png", dpi=64)
-plt.close()
+# Save chart
+plt.savefig("chart.png", dpi=100)
