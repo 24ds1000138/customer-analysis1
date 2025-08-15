@@ -4,38 +4,27 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-# Seaborn style and context
+# Seaborn style
 sns.set_style("whitegrid")
-sns.set_context("talk")
 
-# Generate realistic synthetic marketing data
+# Synthetic data
 np.random.seed(42)
-n = 60
 df = pd.DataFrame({
-    "Ad_Spend_USD": np.random.uniform(1000, 10000, n),
-    "Conversions": np.random.uniform(50, 500, n),
-    "Channel": np.random.choice(["Social Media", "Search Engine", "Email"], n)
+    "Ad_Spend_USD": np.random.uniform(1000, 10000, 50),
+    "Conversions": np.random.uniform(50, 500, 50)
 })
 
-# Create a 512x512 figure
+# Create figure 512x512 px
 fig, ax = plt.subplots(figsize=(8, 8), dpi=64)
 
-# Seaborn scatterplot
-sns.scatterplot(
-    x="Ad_Spend_USD",
-    y="Conversions",
-    hue="Channel",
-    palette="deep",
-    data=df,
-    s=100,
-    ax=ax
-)
+# Simple scatterplot (no hue, default palette)
+sns.scatterplot(x="Ad_Spend_USD", y="Conversions", data=df, ax=ax)
 
 # Titles and labels
-ax.set_title("Marketing Campaign Effectiveness", fontsize=18, fontweight="bold")
-ax.set_xlabel("Ad Spend (USD)", fontsize=14)
-ax.set_ylabel("Conversions", fontsize=14)
+ax.set_title("Marketing Campaign Effectiveness")
+ax.set_xlabel("Ad Spend (USD)")
+ax.set_ylabel("Conversions")
 
-# Save exactly 512x512 pixels without altering the figure
+# Save exact 512x512 image
 fig.savefig("chart.png", dpi=64)
 plt.close(fig)
