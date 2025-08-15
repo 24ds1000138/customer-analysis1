@@ -18,8 +18,8 @@ df = pd.DataFrame({
 })
 
 # Create the scatterplot
-plt.figure(figsize=(8, 8))  # 8 inches * 64 dpi = 512px
-scatter = sns.scatterplot(
+plt.figure(figsize=(8, 8), dpi=64)  # Exactly 512x512 pixels
+sns.scatterplot(
     data=df,
     x="Ad_Spend_USD",
     y="Conversions",
@@ -34,5 +34,6 @@ plt.title("Marketing Campaign Effectiveness", fontsize=18, fontweight='bold')
 plt.xlabel("Ad Spend (USD)", fontsize=14)
 plt.ylabel("Conversions", fontsize=14)
 
-# Save chart as 512x512 pixels
-plt.savefig("chart.png", dpi=64, bbox_inches='tight')
+# Save chart without trimming — ensures exact size
+plt.savefig("chart.png", dpi=64)
+plt.close()
