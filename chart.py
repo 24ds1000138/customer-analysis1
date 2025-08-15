@@ -2,18 +2,37 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
-# Example dataset
+# Set Seaborn style and context for presentation
+sns.set_style("whitegrid")
+sns.set_context("talk")
+
+# Generate synthetic marketing campaign effectiveness data
+np.random.seed(42)
+n = 50
 df = pd.DataFrame({
-    "x": [1, 2, 3, 4, 5, 6],
-    "y": [2, 4, 1, 8, 7, 3]
+    "Ad_Spend_USD": np.random.uniform(1000, 10000, n),
+    "Conversions": np.random.uniform(50, 500, n) + np.random.normal(0, 20, n),
+    "Channel": np.random.choice(["Social Media", "Search Engine", "Email"], n)
 })
 
-# Create seaborn scatterplot
-sns.scatterplot(x="x", y="y", data=df)
+# Create the scatterplot
+plt.figure(figsize=(8, 8))  # 8 inches * 64 dpi = 512px
+scatter = sns.scatterplot(
+    data=df,
+    x="Ad_Spend_USD",
+    y="Conversions",
+    hue="Channel",
+    palette="Set2",
+    s=100,
+    edgecolor="black"
+)
 
-# Ensure exact 512x512 pixels at 100 DPI
-plt.gcf().set_size_inches(512/100, 512/100)
+# Add title and labels
+plt.title("Marketing Campaign Effectiveness", fontsize=18, fontweight='bold')
+plt.xlabel("Ad Spend (USD)", fontsize=14)
+plt.ylabel("Conversions", fontsize=14)
 
-# Save chart
-plt.savefig("chart.png", dpi=100)
+# Save chart as 512x512 pixels
+plt.savefig("chart.png", dpi=64, bbox_inches='tight')
