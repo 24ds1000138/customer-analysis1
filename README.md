@@ -12,3 +12,4 @@ Email: 24ds1000138@ds.study.iitm.ac.in
 ```bash
 pip install seaborn matplotlib pandas numpy
 python chart.py
+Contact: 24ds1000138@ds.study.iitm.ac.in
