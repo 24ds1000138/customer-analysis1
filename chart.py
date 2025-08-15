@@ -48,8 +48,8 @@ plt.legend(title='Marketing Campaign', loc='upper left')
 plt.tight_layout()
 
 # Save the chart as a PNG with 512x512 pixel dimensions
-# The `bbox_inches='tight'` parameter has been removed to ensure the output is exactly 512x512 pixels.
+# Remove bbox_inches='tight' to prevent resizing
 plt.savefig('chart.png', dpi=64)
 
-# Render the plot to the screen to ensure it is fully finalized
+# Show the plot to ensure it is finalized
 plt.show()
