@@ -17,7 +17,7 @@ df = pd.DataFrame({
     "Channel": np.random.choice(["Social Media", "Search Engine", "Email"], n)
 })
 
-# Create a 512x512 figure
+# Create figure exactly 512x512 px
 fig, ax = plt.subplots(figsize=(8, 8), dpi=64)
 
 # Seaborn scatterplot
@@ -26,18 +26,16 @@ sns.scatterplot(
     x="Ad_Spend_USD",
     y="Conversions",
     hue="Channel",
-    palette="deep",  # standard seaborn palette
-    s=100
+    palette="deep",
+    s=100,
+    ax=ax
 )
 
 # Labels & title
-plt.title("Marketing Campaign Effectiveness", fontsize=18, fontweight='bold')
-plt.xlabel("Ad Spend (USD)", fontsize=14)
-plt.ylabel("Conversions", fontsize=14)
+ax.set_title("Marketing Campaign Effectiveness", fontsize=18, fontweight='bold')
+ax.set_xlabel("Ad Spend (USD)", fontsize=14)
+ax.set_ylabel("Conversions", fontsize=14)
 
-# Force figure size
-fig.set_size_inches(8, 8, forward=True)
-
-# Save EXACT 512×512 image
-plt.savefig("chart.png", dpi=64, pad_inches=0)
+# Save WITHOUT 'tight' to keep exact size
+plt.savefig("chart.png", dpi=64)
 plt.close(fig)
