@@ -5,11 +5,11 @@ import pandas as pd
 import numpy as np
 
 # Fixed random seed for reproducibility
-np.random.seed(42)
+np.random.seed(0)
 
-# Generate synthetic data
-cac = np.random.normal(loc=200, scale=50, size=100)
-clv = cac * 4 + np.random.normal(0, 200, size=100)  # simple linear relationship
+# Generate deterministic synthetic data
+cac = np.linspace(100, 300, 100)  # evenly spaced CAC values
+clv = cac * 4 + 500  # fixed linear relationship
 
 df = pd.DataFrame({
     "Customer Acquisition Cost (USD)": cac,
@@ -30,11 +30,11 @@ sns.scatterplot(
     y="Customer Lifetime Value (USD)"
 )
 
-# Titles and labels
+# Labels and title
 plt.title("Customer Lifetime Value vs. Acquisition Cost")
 plt.xlabel("Customer Acquisition Cost (USD)")
 plt.ylabel("Customer Lifetime Value (USD)")
 
-# Save without bbox_inches to preserve size
+# Save exactly 512x512 pixels
 plt.savefig("chart.png", dpi=64)
 plt.close()
