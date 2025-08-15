@@ -1,18 +1,14 @@
-# Marketing Campaign Effectiveness Analysis
+# Customer Analysis Project
 
-This project demonstrates how to create a **Seaborn scatterplot** for analyzing the effectiveness of marketing campaigns.
+This repository contains:
+- `chart.py` — Python script using seaborn to create a 512×512 scatterplot  
+- `chart.png` — Visualization output from `chart.py`  
+- `README.md` — Project documentation
 
-## Chart Details
-- **Chart Type:** Seaborn Scatterplot
-- **Data:** Synthetic dataset of advertising spend vs conversions across different channels
-- **Color Palette:** `deep`
-- **Size:** 512x512 pixels
-
-## Files
-- `chart.py` → Python script to generate the chart
-- `chart.png` → Generated scatterplot image
+## Author
+Email: 24ds1000138@ds.study.iitm.ac.in
 
 ## How to Run
-1. Install required packages:
-   ```bash
-   pip install seaborn matplotlib pandas numpy
+```bash
+pip install seaborn matplotlib pandas numpy
+python chart.py
